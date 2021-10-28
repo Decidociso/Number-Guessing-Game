@@ -2,6 +2,7 @@
 Python Web Development Techdegree
 Project 1 - Number Guessing Game
 """
+# GOING FOR EXCEEDS
 
 import random
 
@@ -16,16 +17,28 @@ def start_game():
   play_game()
 
 def play_game():
+  high_score = 10
   attempts = 1
   secret = random.randint(1, 10)
+
   try:
+    print("The current high score is {}. Lower is better.".format(high_score))
     guess = int(input("Guess a number between 1 and 10:   "))
-  except ValueError:
-    print("That is an invalid entry. Please input only integers between 1 and 10.")
-    play_game()
-  else:
     while guess != secret:
-      if guess > secret:
+      if guess == "":
+        raise ValueError("Your guess cannot be blank")
+        attempts += 1
+        continue
+      elif guess == 0:
+        raise ValueError("Your guess cannot be 0")
+        attempts += 1
+        continue
+      elif guess > 10:
+        print("Your guess cannot be greater than 10.")
+        attempts += 1
+        guess = int(input("Guess:   "))
+        continue
+      elif guess > secret:
         print("The number is lower.")
         guess = int(input("Guess:   "))
         attempts += 1
@@ -38,7 +51,19 @@ def play_game():
     else:
       print("{} you guessed the correct number in {} tries".format(player, attempts))
       print("Game Over!")
-  
+      print("\n\n")
+      if attempts < high_score:
+        high_score = attempts
+      play_again = input("Would you like to play again? yes/no  ")
+      if play_again.lower == "yes":
+        print("Thank you for playing. Good bye.")
+      else:
+        play_game()
+
+  except ValueError:
+    print("That is an invalid entry. Please input only integers between 1 and 10.")
+    attempts += 1
+    play_game()
 
 # Kick off the program by calling the start_game function.
 start_game()
