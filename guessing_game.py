@@ -22,8 +22,8 @@ def play_game():
   secret = random.randint(1, 10)
 
   try:
-    print("The current high score is {}. Lower is better.".format(high_score))
     guess = int(input("Guess a number between 1 and 10:   "))
+    print("The current high score is {}. Lower is better.".format(high_score))
     while guess != secret:
       if guess == "":
         raise ValueError("Your guess cannot be blank")
@@ -55,10 +55,10 @@ def play_game():
       if attempts < high_score:
         high_score = attempts
       play_again = input("Would you like to play again? yes/no  ")
-      if play_again.lower() == "yes":
+      if play_again.lower() == "no":
         print("Thank you for playing. Good bye.")
       else:
-        play_game()
+        continue
 
   except ValueError:
     print("That is an invalid entry. Please input only integers between 1 and 10.")
