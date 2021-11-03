@@ -55,7 +55,7 @@ def play_game():
       if attempts < high_score:
         high_score = attempts
       play_again = input("Would you like to play again? yes/no  ")
-      if play_again.lower == "yes":
+      if play_again.lower() == "yes":
         print("Thank you for playing. Good bye.")
       else:
         play_game()
