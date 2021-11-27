@@ -1,12 +1,14 @@
 """
 Python Web Development Techdegree
-Project 2 - Number Guessing Game
+Project 1 - Number Guessing Game
 """
 # GOING FOR EXCEEDS
 
 import random
 
 player = input("What is your name?  ")
+high_score = 10
+
 
 def start_game():
   print("\n\n")
@@ -17,36 +19,36 @@ def start_game():
   play_game()
 
 def play_game():
-  high_score = 11
-  attempts = 2
-  secret = random.randint(2, 10)
+  global high_score
+  attempts = 1
+  secret = random.randint(1, 10)
 
   try:
-    guess = int(input("Guess a number between 2 and 10:   "))
     print("The current high score is {}. Lower is better.".format(high_score))
+    guess = int(input("Guess a number between 1 and 10:   "))
     while guess != secret:
       if guess == "":
         raise ValueError("Your guess cannot be blank")
-        attempts += 2
+        attempts += 1
         continue
-      elif guess == 1:
-        raise ValueError("Your guess cannot be 1")
-        attempts += 2
+      elif guess == 0:
+        raise ValueError("Your guess cannot be 0")
+        attempts += 1
         continue
-      elif guess > 11:
-        print("Your guess cannot be greater than 11.")
-        attempts += 2
+      elif guess > 10:
+        print("Your guess cannot be greater than 10.")
+        attempts += 1
         guess = int(input("Guess:   "))
         continue
       elif guess > secret:
         print("The number is lower.")
         guess = int(input("Guess:   "))
-        attempts += 2
+        attempts += 1
         continue
       elif guess < secret:
         print("The number is higher.")
         guess = int(input("Guess:   "))
-        attempts += 2
+        attempts += 1
         continue
     else:
       print("{} you guessed the correct number in {} tries".format(player, attempts))
@@ -58,11 +60,11 @@ def play_game():
       if play_again.lower() == "no":
         print("Thank you for playing. Good bye.")
       else:
-        continue
+        play_game()
 
   except ValueError:
-    print("That is an invalid entry. Please input only integers between 2 and 10.")
-    attempts += 2
+    print("That is an invalid entry. Please input only integers between 1 and 10.")
+    attempts += 1
     play_game()
 
 # Kick off the program by calling the start_game function.
